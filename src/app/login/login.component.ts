@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core'; // Import OnInit
 import { FormsModule } from '@angular/forms';
 
 import { NgForm } from '@angular/forms';
@@ -13,8 +13,9 @@ import { Select2 } from 'ng-select2-component'; // Import Select2 component
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit { // Implement OnInit
   isRightPanelActive = false;
+  isDestopOrLaptop = true;
 
   states: Array<{ value: string; label: string }> = [
     { value: "1", label: "Aguascalientes" },
@@ -68,6 +69,12 @@ export class LoginComponent {
       birthDate: null
   };
 
+  ngOnInit(): void {
+    this.isDestopOrLaptop = window.matchMedia('(min-width: 768px)').matches;
+    window.addEventListener('resize', () => {
+      this.isDestopOrLaptop = window.matchMedia('(min-width: 768px)').matches;
+    });
+  }
 
   onSignUpClick(): void {
     this.isRightPanelActive = true;

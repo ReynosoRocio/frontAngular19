@@ -197,19 +197,19 @@ input {
 
   @media (max-width: 1024px) {
     position: relative;
-    width: 140%; // Ocupa todo el ancho
+    width: 100%; // Ocupa todo el ancho
     height: auto; // Ajusta la altura automáticamente
     z-index: auto;
     flex-shrink: 0; // Evita que los formularios se reduzcan
 
     &.custom-sign-in-container {
-      width: 60%; // Ocupa todo el ancho
-      left: -25%;
+      width: 50%; // Ocupa todo el ancho
+      left: -25%;      
 
     }
 
     &.custom-sign-up-container {
-      width: 60%; // Ocupa todo el ancho
+      width: 50%; // Ocupa todo el ancho
       left: -25%;
 
     }
