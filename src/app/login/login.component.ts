@@ -42,7 +42,10 @@ export class LoginComponent {
     { id: 26, name: "Tlaxcala" },
     { id: 27, name: "Veracruz" },
     { id: 28, name: "Yucatán" },
-    { id: 29, name: "Zacatecas" }
+    { id: 29, name: "Zacatecas" },
+    { id: 30, name: "Baja California" },
+    { id: 31, name: "Baja California Sur" },
+    { id: 32, name: "Ciudad de México" },
   ];
 
   // correo electrónico, password, nombre, fecha de nacimiento y estado de nacimiento.
