@@ -1,8 +1,8 @@
-<button (click)="openModal()" icon="pi pi-pencil" class="p-button-outlined">{{ mode == 0 ? 'Editar mi perfil' : 'Editar usuario' }}</button>
+<button (click)="openModal()" icon="pi pi-pencil" class="p-button-outlined">{{ mode == 0 ? 'Editar mi perfil' : mode == 2 ? 'Crear usuario' : 'Editar usuario' }}</button>
 
 <div class="modal" *ngIf="isModalOpen">
   <div class="modal-content">
-    <h2>{{ mode === 1 ? 'Editar Mis Datos' : 'Editar Usuario' }}</h2>
+    <h2>{{ mode === 1 ? 'Editar Mis Datos' : mode == 2 ? 'Crear usuario' : 'Editar Usuario' }}</h2>
     <form #editForm="ngForm" (ngSubmit)="onSubmit(editForm)">
       <!-- Email -->
       <div class="p-field">

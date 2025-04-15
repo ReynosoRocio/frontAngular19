@@ -22,7 +22,7 @@ export class UserEditComponent {
     confirmPassword: '',
     oldPassword: '',
     birthDate: null,
-    userType: '' // Nuevo campo para el tipo de usuario
+    userType : 1, // 0 for admin, 1 for user
   };
 
   public passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[-?!\[\]{}]).{6,}$/;
@@ -52,14 +52,12 @@ export class UserEditComponent {
       const isOldEnough = this.isOldEnough(this.user.birthDate);
       const isPasswordValid = this.isPasswordValid(this.user.password);
 
-      if (!isOldEnough || !isPasswordValid || (this.mode === 1 && !this.user.oldPassword) || this.user.password !== this.user.confirmPassword || !this.user.userType) {
+      if (!isOldEnough || !isPasswordValid || (this.mode === 1 && !this.user.oldPassword) || this.user.password !== this.user.confirmPassword) {
         return; // Errors will be displayed in the template
       }
 
       if (this.mode === 1) {
         console.log('Actualizando tus propios datos:', this.user);
-      } else if (this.mode === 2) {
-        console.log('Creando un nuevo usuario con tipo:', this.user.userType, this.user);
       } else {
         console.log(`Actualizando datos del usuario con ID ${this.userId}:`, this.user);
       }

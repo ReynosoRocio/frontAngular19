@@ -19,6 +19,7 @@ export class ProfileComponent {
     email: 'juan.perez@example.com',
     birthDate: '1990-05-15',
     state: 'Ciudad de México',
-    avatar: 'https://ui-avatars.com/api/?name=Juan+Pérez'
+    avatar: 'https://ui-avatars.com/api/?name=Juan+Pérez',
+    userType: 1 // 0 for admin, 1 for user
   };
 }
