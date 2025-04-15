@@ -11,6 +11,7 @@
     <p><i class="pi pi-map-marker"></i> <strong>Estado:</strong> {{ user.state }}</p>
   </div>
   <ng-template pTemplate="footer">
-    <app-user-edit></app-user-edit>
+    <app-user-edit [mode]="0"></app-user-edit>
+    <app-user-edit [mode]="1" [userId]="123w"></app-user-edit>
 </ng-template>
 </p-card>

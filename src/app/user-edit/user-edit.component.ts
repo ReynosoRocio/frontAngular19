@@ -24,6 +24,20 @@ export class UserEditComponent {
     birthDate: null
   };
 
+  public passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[-?!\[\]{}]).{6,}$/;
+
+  public isOldEnough(birthDate: string | null): boolean {
+    if (!birthDate) return false;
+    const currentDate = new Date();
+    const birth = new Date(birthDate);
+    const age = currentDate.getFullYear() - birth.getFullYear();
+    return age > 13 || (age === 13 && currentDate >= new Date(birth.setFullYear(birth.getFullYear() + 13)));
+  }
+
+  public isPasswordValid(password: string): boolean {
+    return this.passwordRegex.test(password);
+  }
+
   openModal(): void {
     this.isModalOpen = true;
   }
@@ -34,13 +48,8 @@ export class UserEditComponent {
 
   onSubmit(form: NgForm): void {
     if (form.valid) {
-      const currentDate = new Date();
-      const birthDate = new Date(this.user.birthDate || '');
-      const age = currentDate.getFullYear() - birthDate.getFullYear();
-      const isOldEnough = age > 13 || (age === 13 && currentDate >= new Date(birthDate.setFullYear(birthDate.getFullYear() + 13)));
-
-      const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[-?!\[\]{}]).{6,}$/;
-      const isPasswordValid = passwordRegex.test(this.user.password);
+      const isOldEnough = this.isOldEnough(this.user.birthDate);
+      const isPasswordValid = this.isPasswordValid(this.user.password);
 
       if (!isOldEnough || !isPasswordValid || (this.mode === 1 && !this.user.oldPassword) || this.user.password !== this.user.confirmPassword) {
         return; // Errors will be displayed in the template
