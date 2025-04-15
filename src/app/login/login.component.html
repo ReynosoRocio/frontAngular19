@@ -2,27 +2,36 @@
     <div class="custom-form-container custom-sign-up-container">
       <form action="#">
         <h1>Crear cuenta</h1>
-        <!-- <div class="custom-social-container">
-          <a href="#" class="custom-social"><i class="fab fa-facebook-f"></i></a>
-          <a href="#" class="custom-social"><i class="fab fa-google-plus-g"></i></a>
-          <a href="#" class="custom-social"><i class="fab fa-linkedin-in"></i></a>
-        </div> 
-        <span>or use your email for registration</span>-->
-        <input type="text" placeholder="Name" />
-        <input type="email" placeholder="Email" />
-        <input type="password" placeholder="Password" />
-        <button>Sign Up</button>
+        <input type="text" placeholder="Nombre" />
+        <input type="email" placeholder="Correo electrónico" />
+        <input type="password" placeholder="Contraseña" />
+        
+        
+        <ng-select
+        [items]="states"
+        bindLabel="name"
+        bindValue="id"
+        [(ngModel)]="selectedState"
+        placeholder="Selecciona tu estado">
+      </ng-select>
+
+
+        <button>Registrarse</button>
+        <!-- Botón extra para cambiar al formulario de inicio de sesión en pantallas pequeñas -->
+        <button class="custom-toggle" (click)="onSignInClick()">Ya tengo una cuenta</button>
       </form>
     </div>
-    <div class="custom-form-container custom-sign-in-container">
+    <div class="custom-form-container custom-sign-in-container" >
       <form action="#">
         <h1>Iniciar sesión</h1>
-       <input type="email" placeholder="Email" />
-        <input type="password" placeholder="Password" />
-        <!-- <a href="#">Forgot your password?</a> -->
+        <input type="email" placeholder="Correo electrónico" />
+        <input type="password" placeholder="Contraseña" />
         <button>Entrar</button>
+        <!-- Botón extra para cambiar al formulario de registro en pantallas pequeñas -->
+        <button class="custom-toggle" (click)="onSignUpClick()">Crear una cuenta</button>
       </form>
     </div>
+    <!-- Panel de superposición, oculto en tabletas y móviles -->
     <div class="custom-overlay-container">
       <div class="custom-overlay">
         <div class="custom-overlay-panel custom-overlay-left">

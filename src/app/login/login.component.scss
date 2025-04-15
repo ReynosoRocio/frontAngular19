@@ -1,9 +1,19 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
 
+
 * {
   box-sizing: border-box;
 }
 
+.ng-select {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.ng-select .ng-select-container {
+  font-size: 14px;
+  padding: 8px;
+}
 body {
   background: #f6f5f7;
   display: flex;
@@ -18,10 +28,12 @@ body {
 h1 {
   font-weight: bold;
   margin: 0;
+  font-size: 2rem; // Ajuste del tamaño de fuente
 }
 
 h2 {
   text-align: center;
+  font-size: 1.5rem; // Ajuste del tamaño de fuente
 }
 
 p {
@@ -30,10 +42,19 @@ p {
   line-height: 20px;
   letter-spacing: 0.5px;
   margin: 20px 0 30px;
+
+  @media (max-width: 768px) {
+    font-size: 12px; // Ajuste del tamaño de fuente en móviles
+    line-height: 18px;
+  }
 }
 
 span {
   font-size: 12px;
+
+  @media (max-width: 768px) {
+    font-size: 10px; // Ajuste del tamaño de fuente en móviles
+  }
 }
 
 a {
@@ -41,6 +62,10 @@ a {
   font-size: 14px;
   text-decoration: none;
   margin: 15px 0;
+
+  @media (max-width: 768px) {
+    font-size: 12px; // Ajuste del tamaño de fuente en móviles
+  }
 }
 
 button {
@@ -54,6 +79,11 @@ button {
   letter-spacing: 1px;
   text-transform: uppercase;
   transition: transform 80ms ease-in;
+
+  @media (max-width: 768px) {
+    font-size: 10px; // Ajuste del tamaño de fuente en móviles
+    padding: 10px 35px; // Ajuste del padding en móviles
+  }
 }
 
 button:active {
@@ -86,6 +116,13 @@ input {
   padding: 12px 15px;
   margin: 8px 0;
   width: 100%;
+  max-width: 400px; // Ancho máximo para pantallas grandes
+  min-width: 200px; // Ancho mínimo para pantallas pequeñas
+
+  @media (max-width: 768px) {
+    font-size: 14px; // Ajuste del tamaño de fuente en móviles
+    padding: 10px 12px; // Ajuste del padding en móviles
+  }
 }
 
 .custom-container {
@@ -169,10 +206,22 @@ input {
 
   @media (max-width: 1024px) {
     position: relative;
-    width: 100%; // Ocupa todo el ancho
+    width: 140%; // Ocupa todo el ancho
     height: auto; // Ajusta la altura automáticamente
     z-index: auto;
     flex-shrink: 0; // Evita que los formularios se reduzcan
+
+    &.custom-sign-in-container {
+      width: 60%; // Ocupa todo el ancho
+      left: -25%;
+
+    }
+
+    &.custom-sign-up-container {
+      width: 60%; // Ocupa todo el ancho
+      left: -25%;
+
+    }
   }
 }
 
@@ -187,10 +236,7 @@ input {
   z-index: 100;
 
   @media (max-width: 1024px) {
-    position: relative;
-    width: 100%; // Ocupa todo el ancho
-    height: auto; // Ajusta la altura automáticamente
-    flex-shrink: 0; // Evita que la superposición se reduzca
+    display: none; // Oculta el panel de superposición en tabletas y móviles
   }
 }
 
@@ -216,7 +262,20 @@ input {
     transform: none; // Elimina la transformación
   }
 }
+.custom-toggle {
+  background-color: transparent;
+  border: none;
+  color: #FF4B2B;
+  font-size: 14px;
+  font-weight: bold;
+  margin-top: 10px;
+  cursor: pointer;
+  text-decoration: underline;
 
+  @media (min-width: 1025px) {
+    display: none; // Oculta el botón extra en pantallas grandes
+  }
+}
 .custom-overlay-panel {
   position: absolute;
   display: flex;
