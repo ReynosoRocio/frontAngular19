@@ -9,8 +9,12 @@ import { importProvidersFrom } from '@angular/core';
 import { NgSelectModule } from '@ng-select/ng-select';
 
 
+import { LoginComponent } from './login/login.component';
 export const appConfig: ApplicationConfig = {
   providers: [
+    provideRouter([
+      { path: '', component: LoginComponent }
+    ]),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideHttpClient(withInterceptors([JwtInterceptor])), // Uso correcto de withInterceptors

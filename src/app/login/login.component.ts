@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
-import { NgSelectModule } from '@ng-select/ng-select';
 import { FormsModule } from '@angular/forms';
-import { NgLabelTemplateDirective, NgOptionTemplateDirective, NgSelectComponent } from '@ng-select/ng-select';
+import { NgSelectModule } from '@ng-select/ng-select';
 
+import { NgForm } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [NgSelectModule, FormsModule, NgLabelTemplateDirective, NgOptionTemplateDirective, NgSelectComponent], // Importa aquí los módulos que necesites
+  imports: [CommonModule,NgSelectModule, FormsModule],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
@@ -48,7 +49,6 @@ export class LoginComponent {
     { id: 32, name: "Ciudad de México" },
   ];
 
-  // correo electrónico, password, nombre, fecha de nacimiento y estado de nacimiento.
   user :
   { selectedState : number | null,
     email : string | null,
@@ -57,12 +57,13 @@ export class LoginComponent {
     name : string | null,
     birthDate : Date | null } = {
       selectedState: null,
-      email: null,
-      password: null,
-      password1: null,
-      name: null,
+      email: '',
+      password: '',
+      password1: '',
+      name: '',
       birthDate: null
   };
+
 
   onSignUpClick(): void {
     this.isRightPanelActive = true;
@@ -72,5 +73,19 @@ export class LoginComponent {
     this.isRightPanelActive = false;
   }
 
-
+  onSubmitSignUp(form: NgForm): void {
+    if (form.valid) {
+      console.log('Registro exitoso:', this.user);
+    } else {
+      console.log('Formulario de registro inválido');
+    }
+  }
+  
+  onSubmitSignIn(form: NgForm): void {
+    if (form.valid) {
+      console.log('Inicio de sesión exitoso:', this.user);
+    } else {
+      console.log('Formulario de inicio de sesión inválido');
+    }
+  }
 }

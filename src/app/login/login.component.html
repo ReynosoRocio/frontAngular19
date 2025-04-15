@@ -1,37 +1,81 @@
 <div class="custom-container" [class.custom-right-panel-active]="isRightPanelActive">
     <div class="custom-form-container custom-sign-up-container">
-      <form action="#">
+      <form #signUpForm="ngForm" (ngSubmit)="onSubmitSignUp(signUpForm)">
         <h1>Crear cuenta</h1>
 
+        <!-- Correo electrónico -->
+        <div class="p-field">
+            <input type="email" name="email" [(ngModel)]="user.email" placeholder="Correo electrónico" class="p-inputtext" required email />
+            <small *ngIf="signUpForm.submitted && !user.email" class="p-error">El correo es obligatorio.</small>
+            <small *ngIf="signUpForm.submitted && user.email && signUpForm.controls.email?.errors?['email']" class="p-error">El correo no es válido.</small>
+        </div>
+
+        <!-- Contraseña -->
+        <div class="p-field">
+            <input type="password" name="password" [(ngModel)]="user.password" placeholder="Contraseña" class="p-inputtext" required minlength="6" />
+            <small *ngIf="signUpForm.submitted && !user.password" class="p-error">La contraseña es obligatoria.</small>
+            <small *ngIf="signUpForm.submitted && user.password && user.password.length < 6" class="p-error">La contraseña debe tener al menos 6 caracteres.</small>
+        </div>
+
+        <!-- Repetir contraseña -->
+        <div class="p-field">
+            <input type="password" name="password1" [(ngModel)]="user.password1" aria-label="password1" placeholder="Repite la contraseña" class="p-inputtext" required />
+            <small *ngIf="signUpForm.submitted && !user.password1" class="p-error">Debes repetir la contraseña.</small>
+            <small *ngIf="signUpForm.submitted && user.password !== user.password1" class="p-error">Las contraseñas no coinciden.</small>
+        </div>
+
+        <!-- Nombre -->
+        <div class="p-field">
+            <input type="text" name="name" [(ngModel)]="user.name" aria-label="name" placeholder="Nombre" class="p-inputtext" required />
+            <small *ngIf="signUpForm.submitted && !user.name" class="p-error">El nombre es obligatorio.</small>
+        </div>
+
+        <!-- Estado -->
+        <div class="p-field">
+            <ng-select
+            [items]="states"
+            bindLabel="name"
+            bindValue="id"
+            name="selectedState"
+            [(ngModel)]="user.selectedState"
+            placeholder="Selecciona tu estado"
+            required>
+            </ng-select>
+            <small *ngIf="signUpForm.submitted && !user.selectedState" class="p-error">El estado es obligatorio.</small>
+        </div>
+
+        <!-- Fecha de nacimiento -->
+        <div class="p-field">
+            <input type="date" name="birthDate" [(ngModel)]="user.birthDate" placeholder="Fecha de nacimiento" class="p-inputtext" required />
+            <small *ngIf="signUpForm.submitted && !user.birthDate" class="p-error">La fecha de nacimiento es obligatoria.</small>
+        </div>   
 
 
-        <input type="email" name="email"  [(ngModel)]="user.email" placeholder="Correo electrónico" />
-        <input type="password" placeholder="Contraseña"  name="password" [(ngModel)]="user.password" />
-        <input type="password" placeholder="Repite la contraseña" name="password1"  [(ngModel)]="user.password1" />
-        <input type="text" placeholder="Nombre" name="name"  [(ngModel)]="user.name" />        
-        <ng-select
-        [items]="states"
-        bindLabel="name"
-        bindValue="id"
-        name="selectedState"
-        [(ngModel)]="user.selectedState"
-        placeholder="Selecciona tu estado">
-      </ng-select>
-        <input type="date" placeholder="Fecha de nacimiento" name="birthDate" [(ngModel)]="user.birthDate" />        
 
-
-
-        <button>Registrarse</button>
+        <button type="submit">Registrarse</button>
         <!-- Botón extra para cambiar al formulario de inicio de sesión en pantallas pequeñas -->
         <button class="custom-toggle" (click)="onSignInClick()">Ya tengo una cuenta</button>
       </form>
     </div>
     <div class="custom-form-container custom-sign-in-container" >
-      <form action="#">
+      <form #signInForm="ngForm" (ngSubmit)="onSubmitSignIn(signInForm)">
         <h1>Iniciar sesión</h1>
-        <input type="email" name="emailL"  [(ngModel)]="user.email" placeholder="Correo electrónico" />
-        <input type="password" name="passwordL"  [(ngModel)]="user.password" placeholder="Contraseña" />
-        <button>Entrar</button>
+
+        <!-- Correo electrónico -->
+        <div class="p-field">
+            <input type="email" name="emailL" [(ngModel)]="user.email" placeholder="Correo electrónico" class="p-inputtext" required email />
+            <small *ngIf="signInForm.submitted && !user.email" class="p-error">El correo es obligatorio.</small>
+            <small *ngIf="signInForm.submitted && user.email && signInForm.controls.emailL?.errors?.email" class="p-error">El correo no es válido.</small>
+        </div>
+
+        <!-- Contraseña -->
+        <div class="p-field">
+            <input type="password" name="passwordL" [(ngModel)]="user.password" placeholder="Contraseña" class="p-inputtext" required minlength="6" />
+            <small *ngIf="signInForm.submitted && !user.password" class="p-error">La contraseña es obligatoria.</small>
+            <small *ngIf="signInForm.submitted && user.password && user.password.length < 6" class="p-error">La contraseña debe tener al menos 6 caracteres.</small>
+        </div>
+
+        <button type="submit">Entrar</button>
         <!-- Botón extra para cambiar al formulario de registro en pantallas pequeñas -->
         <button class="custom-toggle" (click)="onSignUpClick()">Crear una cuenta</button>
       </form>
