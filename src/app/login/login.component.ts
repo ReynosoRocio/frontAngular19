@@ -1,19 +1,18 @@
-import { Component, OnInit } from '@angular/core'; // Import OnInit
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-
 import { NgForm } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-
+import { Router } from '@angular/router';
 import { Select2 } from 'ng-select2-component'; // Import Select2 component
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, FormsModule, Select2], // Ensure Select2 is here
+  imports: [CommonModule, FormsModule, Select2], // Ensure Select2 is here], // Removed PrimeNG imports
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit { // Implement OnInit
+export class LoginComponent implements OnInit {
   isRightPanelActive = false;
   isDestopOrLaptop = true;
 
@@ -69,6 +68,8 @@ export class LoginComponent implements OnInit { // Implement OnInit
       birthDate: null
   };
 
+  constructor(private router: Router) {}
+
   ngOnInit(): void {
     this.isDestopOrLaptop = window.matchMedia('(min-width: 768px)').matches;
     window.addEventListener('resize', () => {
@@ -95,6 +96,8 @@ export class LoginComponent implements OnInit { // Implement OnInit
   onSubmitSignIn(form: NgForm): void {
     if (form.valid) {
       console.log('Inicio de sesión exitoso:', this.user);
+      localStorage.setItem('isLoggedIn', 'true');
+      this.router.navigate(['/profile']);
     } else {
       console.log('Formulario de inicio de sesión inválido');
     }
@@ -106,6 +109,5 @@ export class LoginComponent implements OnInit { // Implement OnInit
 
   updateSelect(event: any): void {
     console.log('Selected state:', event.target.value);
-    //this.user.selectedState = event.target.value;
   }
 }

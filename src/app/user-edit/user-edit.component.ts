@@ -1,11 +1,13 @@
 import { Component, Input } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { PasswordModule } from 'primeng/password'; // Import PasswordModule
+import { DropdownModule } from 'primeng/dropdown'; // Import DropdownModule
 
 @Component({
   selector: 'app-user-edit',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, PasswordModule, DropdownModule], // Add modules here
   templateUrl: './user-edit.component.html',
   styleUrls: ['./user-edit.component.scss']
 })

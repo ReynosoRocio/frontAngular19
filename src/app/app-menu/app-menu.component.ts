@@ -15,4 +15,8 @@ export class AppMenuComponent {
     { label: 'Profile', icon: 'pi pi-user', routerLink: '/profile' },
     { label: 'Users', icon: 'pi pi-users', routerLink: '/users' }
   ];
+
+  isLoggedIn(): boolean {
+    return localStorage.getItem('isLoggedIn') === 'true'; // Check login state
+  }
 }

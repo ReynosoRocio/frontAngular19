@@ -1,4 +1,6 @@
-<button (click)="openModal()" icon="pi pi-pencil" class="p-button-outlined">{{ mode == 0 ? 'Editar mi perfil' : mode == 2 ? 'Crear usuario' : 'Editar usuario' }}</button>
+<button (click)="openModal()" icon="pi pi-pencil" class="p-button p-button-outlined">
+  {{ mode == 0 ? 'Editar mi perfil' : mode == 2 ? 'Crear usuario' : 'Editar usuario' }}
+</button>
 
 <div class="modal" *ngIf="isModalOpen">
   <div class="modal-content">
@@ -7,7 +9,7 @@
       <!-- Email -->
       <div class="p-field">
         <label for="email">Correo Electrónico</label>
-        <input type="email" id="email" [(ngModel)]="user.email" name="email" required email />
+        <input pInputText type="email" id="email" [(ngModel)]="user.email" name="email" required email />
         <small *ngIf="editForm?.submitted && !user?.email" class="p-error">El correo es obligatorio.</small>
         <small *ngIf="editForm?.submitted && user?.email && editForm.controls['email']?.errors?.['email']" class="p-error">El correo no es válido.</small>
       </div>
@@ -15,23 +17,22 @@
       <!-- Name -->
       <div class="p-field">
         <label for="name">Nombre</label>
-        <input type="text" id="name" [(ngModel)]="user.name" name="name" required />
+        <input pInputText type="text" id="name" [(ngModel)]="user.name" name="name" required />
         <small *ngIf="editForm?.submitted && !user?.name" class="p-error">El nombre es obligatorio.</small>
       </div>
 
       <!-- Lastname -->
       <div class="p-field">
         <label for="lastname">Apellido</label>
-        <input type="text" id="lastname" [(ngModel)]="user.lastname" name="lastname" required />
+        <input pInputText type="text" id="lastname" [(ngModel)]="user.lastname" name="lastname" required />
         <small *ngIf="editForm?.submitted && !user?.lastname" class="p-error">El apellido es obligatorio.</small>
       </div>
 
       <!-- Password -->
       <div class="p-field">
         <label for="password">Nueva Contraseña</label>
-        <input type="password" id="password" [(ngModel)]="user.password" name="password" required minlength="6" />
+        <p-password id="password" [(ngModel)]="user.password" name="password" required [feedback]="false"></p-password>
         <small *ngIf="editForm?.submitted && !user?.password" class="p-error">La contraseña es obligatoria.</small>
-        <small *ngIf="editForm?.submitted && user?.password && user.password.length < 6" class="p-error">La contraseña debe tener al menos 6 caracteres.</small>
         <small *ngIf="editForm?.submitted && user?.password && !isPasswordValid(user.password)" class="p-error">
           La contraseña debe incluir mayúsculas, minúsculas y al menos un símbolo de: -?![]
         </small>
@@ -40,21 +41,21 @@
       <!-- Confirm Password -->
       <div class="p-field">
         <label for="confirmPassword">Confirmar Contraseña</label>
-        <input type="password" id="confirmPassword" [(ngModel)]="user.confirmPassword" name="confirmPassword" required />
+        <p-password id="confirmPassword" [(ngModel)]="user.confirmPassword" name="confirmPassword" required [feedback]="false"></p-password>
         <small *ngIf="editForm?.submitted && user?.password !== user?.confirmPassword" class="p-error">Las contraseñas no coinciden.</small>
       </div>
 
       <!-- Old Password (only for mode 1) -->
       <div class="p-field" *ngIf="mode === 1">
         <label for="oldPassword">Contraseña Anterior</label>
-        <input type="password" id="oldPassword" [(ngModel)]="user.oldPassword" name="oldPassword" required />
+        <p-password id="oldPassword" [(ngModel)]="user.oldPassword" name="oldPassword" required [feedback]="false"></p-password>
         <small *ngIf="editForm?.submitted && !user?.oldPassword" class="p-error">La contraseña anterior es obligatoria.</small>
       </div>
 
       <!-- Birth Date -->
       <div class="p-field">
         <label for="birthDate">Fecha de Nacimiento</label>
-        <input type="date" id="birthDate" [(ngModel)]="user.birthDate" name="birthDate" required />
+        <input pInputText type="date" id="birthDate" [(ngModel)]="user.birthDate" name="birthDate" required />
         <small *ngIf="editForm?.submitted && !user?.birthDate" class="p-error">La fecha de nacimiento es obligatoria.</small>
         <small *ngIf="editForm?.submitted && user?.birthDate && !isOldEnough(user.birthDate)" class="p-error">
           Debes tener al menos 13 años para actualizar los datos.
@@ -64,17 +65,16 @@
       <!-- User Type (only for mode 2) -->
       <div class="p-field" *ngIf="mode === 2">
         <label for="userType">Tipo de Usuario</label>
-        <select id="userType" [(ngModel)]="user.userType" name="userType" required>
-          <option value="" disabled selected>Selecciona un tipo</option>
-          <option value="admin">Administrador</option>
-          <option value="editor">Editor</option>
-          <option value="viewer">Visualizador</option>
-        </select>
+        <p-dropdown id="userType" [(ngModel)]="user.userType" name="userType" [options]="[
+          { label: 'Administrador', value: 'admin' },
+          { label: 'Editor', value: 'editor' },
+          { label: 'Visualizador', value: 'viewer' }
+        ]" placeholder="Selecciona un tipo"></p-dropdown>
         <small *ngIf="editForm?.submitted && !user?.userType" class="p-error">El tipo de usuario es obligatorio.</small>
       </div>
 
-      <button type="submit">Guardar Cambios</button>
-      <button type="button" (click)="closeModal()">Cancelar</button>
+      <button pButton type="submit" label="Guardar Cambios" class="p-button-success"></button>
+      <button pButton type="button" label="Cancelar" class="p-button-secondary" (click)="closeModal()"></button>
     </form>
   </div>
 </div>
