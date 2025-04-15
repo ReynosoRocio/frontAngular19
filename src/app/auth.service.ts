@@ -21,4 +21,16 @@ export class AuthService {
   isAuthenticated(): boolean {
     return !!this.getToken();
   }
+
+  getUserType(): number | null {
+    const token = this.getToken();
+    if (!token) return null;
+
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1])); // Decode JWT payload
+      return payload.tipoUsuario; // Extract 'tipoUsuario' from the payload
+    } catch {
+      return null;
+    }
+  }
 }

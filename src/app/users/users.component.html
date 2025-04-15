@@ -1,1 +1,30 @@
-<p>users works!</p>
+<div *ngIf="!isAuthorized">
+  <p>No deberías estar aquí.</p>
+</div>
+
+<div *ngIf="isAuthorized">
+  <button (click)="onEdit(null)" class="p-button-outlined">Crear Usuario</button>
+  <table>
+    <thead>
+      <tr>
+        <th>Email</th>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Fecha de Nacimiento</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users">
+        <td>{{ user.email }}</td>
+        <td>{{ user.name }}</td>
+        <td>{{ user.lastname }}</td>
+        <td>{{ user.birthDate }}</td>
+        <td>
+          <button (click)="onEdit(user.id)">Editar</button>
+          <button (click)="onDelete(user.id)">Borrar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
