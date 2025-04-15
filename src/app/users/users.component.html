@@ -21,7 +21,7 @@
         <td>{{ user.lastname }}</td>
         <td>{{ user.birthDate }}</td>
         <td>
-          <button (click)="onEdit(user.id)"><app-user-edit [mode]="0" [userId]="'wewjewj'"></app-user-edit></button>
+          <app-user-edit [mode]="0" [userId]="'wewjewj'"></app-user-edit>
           <button (click)="onDelete(user.id)">Borrar</button>
         </td>
       </tr>
