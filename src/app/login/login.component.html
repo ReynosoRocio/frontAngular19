@@ -8,8 +8,7 @@
         <input type="email" name="email"  [(ngModel)]="user.email" placeholder="Correo electrónico" />
         <input type="password" placeholder="Contraseña"  name="password" [(ngModel)]="user.password" />
         <input type="password" placeholder="Repite la contraseña" name="password1"  [(ngModel)]="user.password1" />
-        <input type="text" placeholder="Nombre" name="name"  [(ngModel)]="user.name" />
-        <input type="date" placeholder="Fecha de nacimiento" name="birthDate" [(ngModel)]="user.birthDate" />        
+        <input type="text" placeholder="Nombre" name="name"  [(ngModel)]="user.name" />        
         <ng-select
         [items]="states"
         bindLabel="name"
@@ -18,6 +17,8 @@
         [(ngModel)]="user.selectedState"
         placeholder="Selecciona tu estado">
       </ng-select>
+        <input type="date" placeholder="Fecha de nacimiento" name="birthDate" [(ngModel)]="user.birthDate" />        
+
 
 
         <button>Registrarse</button>
