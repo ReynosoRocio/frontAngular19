@@ -61,6 +61,18 @@
         </small>
       </div>
 
+      <!-- User Type (only for mode 2) -->
+      <div class="p-field" *ngIf="mode === 2">
+        <label for="userType">Tipo de Usuario</label>
+        <select id="userType" [(ngModel)]="user.userType" name="userType" required>
+          <option value="" disabled selected>Selecciona un tipo</option>
+          <option value="admin">Administrador</option>
+          <option value="editor">Editor</option>
+          <option value="viewer">Visualizador</option>
+        </select>
+        <small *ngIf="editForm?.submitted && !user?.userType" class="p-error">El tipo de usuario es obligatorio.</small>
+      </div>
+
       <button type="submit">Guardar Cambios</button>
       <button type="button" (click)="closeModal()">Cancelar</button>
     </form>

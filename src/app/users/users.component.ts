@@ -1,13 +1,16 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-users',
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss']
 })
 export class UsersComponent implements OnInit {
-  isAuthorized = false;
+  isAuthorized = true;
   users = [
     { id: '1', email: 'user1@example.com', name: 'User', lastname: 'One', birthDate: '1990-01-01' },
     { id: '2', email: 'user2@example.com', name: 'User', lastname: 'Two', birthDate: '1995-05-15' }
@@ -20,9 +23,14 @@ export class UsersComponent implements OnInit {
     this.isAuthorized = userType === 0; // Only allow access if user type is 0 (admin)
   }
 
-  onEdit(userId: string): void {
-    console.log(`Editing user with ID: ${userId}`);
-    // Logic to open the UserEditComponent in mode 2
+  onEdit(userId: string | null): void {
+    if (userId === null) {
+      console.log('Creating a new user');
+      // Logic to open the UserEditComponent in creation mode
+    } else {
+      console.log(`Editing user with ID: ${userId}`);
+      // Logic to open the UserEditComponent in edit mode
+    }
   }
 
   onDelete(userId: string): void {

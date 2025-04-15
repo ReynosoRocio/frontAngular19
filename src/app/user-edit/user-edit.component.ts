@@ -10,7 +10,7 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./user-edit.component.scss']
 })
 export class UserEditComponent {
-  @Input() mode: number = 0; // 1 for editing your own data, 0 for general editing
+  @Input() mode: number = 0; // 1 for editing your own data, 0 for general editing, 2 for creating a new user
   @Input() userId: string | null = null; // User ID for general editing
   isModalOpen = false;
 
@@ -21,7 +21,8 @@ export class UserEditComponent {
     password: '',
     confirmPassword: '',
     oldPassword: '',
-    birthDate: null
+    birthDate: null,
+    userType: '' // Nuevo campo para el tipo de usuario
   };
 
   public passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[-?!\[\]{}]).{6,}$/;
@@ -51,12 +52,14 @@ export class UserEditComponent {
       const isOldEnough = this.isOldEnough(this.user.birthDate);
       const isPasswordValid = this.isPasswordValid(this.user.password);
 
-      if (!isOldEnough || !isPasswordValid || (this.mode === 1 && !this.user.oldPassword) || this.user.password !== this.user.confirmPassword) {
+      if (!isOldEnough || !isPasswordValid || (this.mode === 1 && !this.user.oldPassword) || this.user.password !== this.user.confirmPassword || !this.user.userType) {
         return; // Errors will be displayed in the template
       }
 
       if (this.mode === 1) {
         console.log('Actualizando tus propios datos:', this.user);
+      } else if (this.mode === 2) {
+        console.log('Creando un nuevo usuario con tipo:', this.user.userType, this.user);
       } else {
         console.log(`Actualizando datos del usuario con ID ${this.userId}:`, this.user);
       }
