@@ -51,10 +51,10 @@ export class LoginComponent {
 
   user :
   { selectedState : number | null,
-    email : string | null,
-    password : string | null,
-    password1 : string | null,
-    name : string | null,
+    email : string ,
+    password : string ,
+    password1 : string ,
+    name : string,
     birthDate : Date | null } = {
       selectedState: null,
       email: '',
@@ -87,5 +87,9 @@ export class LoginComponent {
     } else {
       console.log('Formulario de inicio de sesión inválido');
     }
+  }
+
+  isEmailInvalid(form: NgForm): boolean {
+    return form?.submitted && this.user?.email && form.controls['emailL']?.errors?.['email'];
   }
 }
