@@ -5,10 +5,6 @@ import { provideHttpClient, withInterceptors } from '@angular/common/http'; // I
 import { routes } from './app.routes';
 import { JwtInterceptor } from './jwt.interceptor';
 
-import { importProvidersFrom } from '@angular/core';
-import { NgSelectModule } from '@ng-select/ng-select';
-
-
 import { LoginComponent } from './login/login.component';
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -17,7 +13,6 @@ export const appConfig: ApplicationConfig = {
     ]),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
-    provideHttpClient(withInterceptors([JwtInterceptor])), // Uso correcto de withInterceptors
-    importProvidersFrom(NgSelectModule) // Importa NgSelectModule aquí
+    provideHttpClient(withInterceptors([JwtInterceptor]))
   ]
 };

@@ -26,21 +26,24 @@
 
         <!-- Nombre -->
         <div class="p-field">
-            <input type="text" name="name" [(ngModel)]="user.name" aria-label="name" placeholder="Nombre" required />
+            <input type="text" name="name" [(ngModel)]="user.name" aria-label="name" placeholder="Nombre(s)" required />
             <small *ngIf="signUpForm?.submitted && !user?.name" class="p-error">El nombre es obligatorio.</small>
         </div>
 
+        <!-- Apellidos -->
+        <div class="p-field">
+          <input type="text" name="lastname" [(ngModel)]="user.lastname" aria-label="lastname" placeholder="Apellido(s)" required />
+          <small *ngIf="signUpForm?.submitted && !user?.lastname" class="p-error">El apellido es obligatorio.</small>
+      </div>
+
         <!-- Estado -->
         <div class="p-field">
-            <ng-select
-            [items]="states"
-            bindLabel="name"
-            bindValue="id"
-            name="selectedState"
-            [(ngModel)]="user.selectedState"
-            placeholder="Selecciona tu estado"
-            required>
-            </ng-select>
+            <select2 
+                [data]="states" 
+                [value]="user.selectedState" 
+                (update)="user.selectedState = $event.value" 
+                placeholder="Selecciona tu estado">
+            </select2>
             <small *ngIf="signUpForm?.submitted && !user?.selectedState" class="p-error">El estado es obligatorio.</small>
         </div>
 
