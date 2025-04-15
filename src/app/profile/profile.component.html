@@ -1,1 +1,16 @@
-<p>profile works!</p>
+<p-card class="profile-card">
+  <ng-template pTemplate="header">
+    <div class="profile-header">
+      <p-avatar image="{{ user.avatar }}" size="xlarge" shape="circle"></p-avatar>
+      <h2>{{ user.name }} {{ user.lastname }}</h2>
+    </div>
+  </ng-template>
+  <div class="profile-details">
+    <p><i class="pi pi-envelope"></i> <strong>Email:</strong> {{ user.email }}</p>
+    <p><i class="pi pi-calendar"></i> <strong>Fecha de Nacimiento:</strong> {{ user.birthDate }}</p>
+    <p><i class="pi pi-map-marker"></i> <strong>Estado:</strong> {{ user.state }}</p>
+  </div>
+  <ng-template pTemplate="footer">
+    <app-user-edit></app-user-edit>
+</ng-template>
+</p-card>
