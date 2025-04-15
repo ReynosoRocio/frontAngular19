@@ -45,7 +45,21 @@ export class LoginComponent {
     { id: 29, name: "Zacatecas" }
   ];
 
-  selectedState: number | null = null;
+  // correo electrónico, password, nombre, fecha de nacimiento y estado de nacimiento.
+  user :
+  { selectedState : number | null,
+    email : string | null,
+    password : string | null,
+    password1 : string | null,
+    name : string | null,
+    birthDate : Date | null } = {
+      selectedState: null,
+      email: null,
+      password: null,
+      password1: null,
+      name: null,
+      birthDate: null
+  };
 
   onSignUpClick(): void {
     this.isRightPanelActive = true;
