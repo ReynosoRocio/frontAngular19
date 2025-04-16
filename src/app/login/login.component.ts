@@ -58,14 +58,19 @@ export class LoginComponent implements OnInit {
     password1 : string ,
     name : string,
     lastname : string,
-    birthDate : Date | null } = {
+    birthDate : Date | null,
+    oldPassword : string | null | undefined,
+    userType : number | null | undefined
+  } = {
       selectedState: null,
       email: '',
       password: '',
       password1: '',
       name: '',
       lastname: '',
-      birthDate: null
+      birthDate: null,
+      oldPassword: null,
+      userType: null
   };
 
   constructor(private router: Router) {}

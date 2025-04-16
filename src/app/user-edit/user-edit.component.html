@@ -40,9 +40,9 @@
 
       <!-- Confirm Password -->
       <div class="p-field">
-        <label for="confirmPassword">Confirmar Contraseña</label>
-        <p-password id="confirmPassword" [(ngModel)]="user.confirmPassword" name="confirmPassword" required [feedback]="false"></p-password>
-        <small *ngIf="editForm?.submitted && user?.password !== user?.confirmPassword" class="p-error">Las contraseñas no coinciden.</small>
+        <label for="password1">Confirmar Contraseña</label>
+        <p-password id="password1" [(ngModel)]="user.password1" name="password1" required [feedback]="false"></p-password>
+        <small *ngIf="editForm?.submitted && user?.password !== user?.password1" class="p-error">Las contraseñas no coinciden.</small>
       </div>
 
       <!-- Old Password (only for mode 1) -->
@@ -60,6 +60,18 @@
         <small *ngIf="editForm?.submitted && user?.birthDate && !isOldEnough(user.birthDate)" class="p-error">
           Debes tener al menos 13 años para actualizar los datos.
         </small>
+      </div>
+
+      <!-- Estado de Nacimiento -->
+      <div class="p-field">
+        <label for="birthState">Estado de Nacimiento</label>
+        <select2 
+          [data]="states" 
+          [value]="user.selectedState" 
+          (update)="user.selectedState = $event.value" 
+          placeholder="Selecciona tu estado de nacimiento">
+        </select2>
+        <small *ngIf="editForm?.submitted && !user?.selectedState" class="p-error">El estado de nacimiento es obligatorio.</small>
       </div>
 
       <!-- User Type (only for mode 2) -->
