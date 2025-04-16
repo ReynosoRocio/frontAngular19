@@ -42,11 +42,11 @@
         <div class="p-field">
             <select2 
                 [data]="states" 
-                [value]="user.selectedState" 
-                (update)="user.selectedState = $event.value" 
+                [value]="user.stateBirth" 
+                (update)="user.stateBirth = $event.value" 
                 placeholder="Selecciona tu estado">
             </select2>
-            <small *ngIf="signUpForm?.submitted && !user?.selectedState" class="p-error">El estado es obligatorio.</small>
+            <small *ngIf="signUpForm?.submitted && !user?.stateBirth" class="p-error">El estado es obligatorio.</small>
         </div>
 
         <!-- Fecha de nacimiento -->

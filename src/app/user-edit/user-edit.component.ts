@@ -18,7 +18,7 @@ export class UserEditComponent {
   @Input() userId: string | null = null; // User ID for general editing
   isModalOpen = false;
 
-  user :  { selectedState : string | null | undefined | number | boolean  | object,
+  user :  { stateBirth : string | null | undefined | number | boolean  | object,
     email : string ,
     password : string ,
     password1 : string ,
@@ -34,7 +34,7 @@ export class UserEditComponent {
     password: '',
     password1: '',
     oldPassword: '',
-    selectedState: null,
+    stateBirth: null,
     birthDate: null,
     userType : 1, // 0 for admin, 1 for user
   };

@@ -52,7 +52,7 @@ export class LoginComponent implements OnInit {
   ];
 
   user :
-  { selectedState : string | null | undefined | number | boolean  | object,
+  { stateBirth : string | null | undefined | number | boolean  | object,
     email : string ,
     password : string ,
     password1 : string ,
@@ -62,7 +62,7 @@ export class LoginComponent implements OnInit {
     oldPassword : string | null | undefined,
     userType : number | null | undefined
   } = {
-      selectedState: null,
+      stateBirth: null,
       email: '',
       password: '',
       password1: '',

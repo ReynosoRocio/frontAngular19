@@ -67,11 +67,11 @@
         <label for="birthState">Estado de Nacimiento</label>
         <select2 
           [data]="states" 
-          [value]="user.selectedState" 
-          (update)="user.selectedState = $event.value" 
+          [value]="user.stateBirth" 
+          (update)="user.stateBirth = $event.value" 
           placeholder="Selecciona tu estado de nacimiento">
         </select2>
-        <small *ngIf="editForm?.submitted && !user?.selectedState" class="p-error">El estado de nacimiento es obligatorio.</small>
+        <small *ngIf="editForm?.submitted && !user?.stateBirth" class="p-error">El estado de nacimiento es obligatorio.</small>
       </div>
 
       <!-- User Type (only for mode 2) -->
