@@ -3,7 +3,7 @@
 </div>
 
 <div *ngIf="isAuthorized">
-  <button (click)="onEdit(null)" class="p-button-outlined">Crear Usuario</button>
+  <app-user-edit [mode]="2"></app-user-edit>
   <table>
     <thead>
       <tr>

@@ -1,6 +1,6 @@
-<button (click)="openModal()" icon="pi pi-pencil" class="p-button p-button-outlined">
+<p-button (click)="openModal()" icon="pi pi-pencil" class="p-button p-button-outlined">
   {{ mode == 0 ? 'Editar mi perfil' : mode == 2 ? 'Crear usuario' : 'Editar usuario' }}
-</button>
+</p-button>
 
 <div class="modal" *ngIf="isModalOpen">
   <div class="modal-content">
@@ -73,8 +73,8 @@
         <small *ngIf="editForm?.submitted && !user?.userType" class="p-error">El tipo de usuario es obligatorio.</small>
       </div>
 
-      <button pButton type="submit" label="Guardar Cambios" class="p-button-success"></button>
-      <button pButton type="button" label="Cancelar" class="p-button-secondary" (click)="closeModal()"></button>
+      <p-button pButton pRipple severity="success" type="submit" label="Guardar Cambios" class="p-button-success"></p-button>
+      <p-button pButton pRipple severity="danger"  type="button" label="Cancelar" class="p-button-secondary" (click)="closeModal()"></p-button>
     </form>
   </div>
 </div>
