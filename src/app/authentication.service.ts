@@ -20,11 +20,19 @@ export class AuthenticationService {
     const loginData = { email, password };
     return this.http.post<{ token: string }>(`${this._baseUrl}/login`, loginData).pipe(
       map(response => {
-        this.setToken(response.token);
-        const user = this.decodeToken(response.token);
-        this._userSubject.next(user);
-        localStorage.setItem('user', JSON.stringify(user));
-        return user;
+        if (response.token) {
+          this.setToken(response.token); // Asegúrate de que el token sea válido antes de almacenarlo
+          const user = this.decodeToken(response.token);
+          if (user) {
+            this._userSubject.next(user);
+            localStorage.setItem('user', JSON.stringify(user));
+          } else {
+            console.error('Token inválido, no se pudo decodificar.');
+          }
+          return user;
+        } else {
+          throw new Error('No se recibió un token válido del servidor.');
+        }
       }),
       catchError(this.handleError)
     );
@@ -38,11 +46,20 @@ export class AuthenticationService {
   }
 
   setToken(token: string): void {
-    localStorage.setItem(this.tokenKey, token);
+    try {
+      localStorage.setItem(this.tokenKey, token); // Asegúrate de que no haya errores al almacenar
+    } catch (error) {
+      console.error('Error al guardar el token en localStorage:', error);
+    }
   }
 
   getToken(): string | null {
-    return localStorage.getItem(this.tokenKey);
+    try {
+      return localStorage.getItem(this.tokenKey); // Maneja posibles errores al recuperar
+    } catch (error) {
+      console.error('Error al recuperar el token de localStorage:', error);
+      return null;
+    }
   }
 
   clearToken(): void {
@@ -54,18 +71,21 @@ export class AuthenticationService {
   }
 
   getUserType(): number | null {
-      const token = this.getToken();
-      if (token) {
+    const token = this.getToken();
+    if (token) {
       const decodedToken = this.decodeToken(token);
-      return decodedToken ? decodedToken.user_type : null;
-      }
-      return null;
+      console.log('Decoded Token:', decodedToken); // Debugging line
+      return decodedToken ? decodedToken.userType : null; // Extract 'userType' key
+    }
+    return null;
   }
 
   private decodeToken(token: string): any {
     try {
-      return JSON.parse(atob(token.split('.')[1])); // Decode JWT payload
-    } catch {
+      const payload = atob(token.split('.')[1]); // Decodifica el payload del JWT
+      return JSON.parse(payload); // Asegúrate de que el payload sea un JSON válido
+    } catch (error) {
+      console.error('Error al decodificar el token:', error);
       return null;
     }
   }

@@ -113,18 +113,20 @@ export class LoginComponent implements OnInit {
 
     this.authService.login(this.user.email, this.user.password).subscribe({
       next: (response) => {
-        this.authService.setToken(response.token); // Guarda el token en el servicio de autenticación
-        const userType = this.authService.getUserType();
-
-        // Redirige según el tipo de usuario
-        if (userType == 0) {
-          this.router.navigate(['/users']); // Admin
+        if (response) {
+          const userType = this.authService.getUserType();
+          if (userType === 0) {
+            this.router.navigate(['/users']); // Admin
+          } else {
+            this.router.navigate(['/profile']); // Usuario normal
+          }
         } else {
-          this.router.navigate(['/profile']); // Usuario normal
+          this.errorMessage = 'Error al iniciar sesión. Token inválido.';
         }
       },
       error: (error) => {
-        this.errorMessage = error.message; // Muestra el mensaje de error
+        console.error('Error en el inicio de sesión:', error);
+        this.errorMessage = error.message || 'Ocurrió un error inesperado.';
       }
     });
   }
