@@ -1,24 +1,34 @@
-import { Injectable, Inject } from '@angular/core';
-import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpHeaders, HttpInterceptorFn } from '@angular/common/http';
+import { catchError, throwError } from 'rxjs';
 import { AuthenticationService } from './authentication.service';
+import { inject } from '@angular/core';
 
-@Injectable()
-export class JwtInterceptor implements HttpInterceptor {
-  constructor(private _authenticationService: AuthenticationService, @Inject('BASE_URL') private _baseUrl: string) {}
+export const JwtInterceptor: HttpInterceptorFn = (req, next) => {
+  const _authService = inject(AuthenticationService);
+  const token = _authService.getToken();
+  let clonedRequest = req;
 
-  intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const isLoggedIn = this._authenticationService.isAuthenticated();
-    const isApiUrl = request.url.indexOf(this._baseUrl) === 0;
-
-    if (isLoggedIn && isApiUrl) {
-      request = request.clone({
-        setHeaders: {
-          Authorization: `Bearer ${this._authenticationService.getToken()}`
-        }
-      });
-    }
-
-    return next.handle(request);
+  if (token) {
+    clonedRequest = req.clone({
+      headers: new HttpHeaders({
+        'Authorization': `Bearer ${token}`
+      })
+    });
   }
-}
+
+  return next(clonedRequest).pipe(
+    catchError(err => {
+      if ([401, 403].includes(err.status)) {
+        console.error('Unauthorized or Forbidden request:', err);
+        _authService.logout(); // Log out the user if token is invalid
+      }
+
+      const error = err.error || {
+        message: 'An error occurred while processing the request',
+        status: err.status
+      };
+      console.error('Error:', error);
+      return throwError(() => error);
+    })
+  );
+};

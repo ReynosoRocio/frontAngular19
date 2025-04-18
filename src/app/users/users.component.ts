@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AuthService } from '../auth.service';
+import { AuthenticationService } from '../authentication.service';
 import { UserEditComponent } from '../user-edit/user-edit.component'; // Import UserEditComponent
 
 @Component({
@@ -17,7 +17,7 @@ export class UsersComponent implements OnInit {
     { id: '2', email: 'user2@example.com', name: 'User', lastname: 'Two', birthDate: '1995-05-15' }
   ];
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthenticationService) {}
 
   ngOnInit(): void {
     const userType = this.authService.getUserType();

@@ -1,6 +1,7 @@
 import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
-import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { routes } from './app.routes';
 import { JwtInterceptor } from './jwt.interceptor';
@@ -11,16 +12,18 @@ import { UserEditComponent } from './user-edit/user-edit.component';
 
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { providePrimeNG } from 'primeng/config';
+import { provideAnimations } from '@angular/platform-browser/animations';
+import { withInterceptors } from '@angular/common/http';
+import { PrimeIcons } from 'primeng/api';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideRouter([
-      { path: '', component: LoginComponent },
-      { path: 'profile', component: ProfileComponent },
-      { path: 'users', component: UserEditComponent }
-    ]),
     provideZoneChangeDetection({ eventCoalescing: true }),
-    provideHttpClient(withInterceptors([JwtInterceptor])),
+    provideRouter(routes),
+    provideHttpClient(
+      withInterceptors([JwtInterceptor]) // Ensure HttpClient is properly configured
+    ),
+    provideAnimations(),
     provideAnimationsAsync(),
     providePrimeNG({
       theme: {
@@ -46,8 +49,8 @@ export const appConfig: ApplicationConfig = {
         overlay: 1000,  // dropdown, overlaypanel
         menu: 1000,     // overlay menus
         tooltip: 1100   // tooltip
-    }
-
-    })
+      }
+    }),
+    { provide: 'BASE_URL', useValue: 'http://127.0.0.1:8000/api' }
   ]
 };

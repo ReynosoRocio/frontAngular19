@@ -3,12 +3,14 @@ import { FormsModule } from '@angular/forms';
 import { NgForm } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+//import { HttpClientModule } from '@angular/common/http'; // Import HttpClientModule
 import { Select2 } from 'ng-select2-component'; // Import Select2 component
+import { AuthenticationService } from '../authentication.service';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, FormsModule, Select2], // Ensure Select2 is here], // Removed PrimeNG imports
+  imports: [CommonModule, FormsModule,  Select2], // Add HttpClientModule here
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
@@ -73,7 +75,12 @@ export class LoginComponent implements OnInit {
       userType: null
   };
 
-  constructor(private router: Router) {}
+  errorMessage = '';
+
+  constructor(
+    private authService: AuthenticationService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.isDestopOrLaptop = window.matchMedia('(min-width: 768px)').matches;
@@ -98,14 +105,28 @@ export class LoginComponent implements OnInit {
     }
   }
   
-  onSubmitSignIn(form: NgForm): void {
-    if (form.valid) {
-      console.log('Inicio de sesión exitoso:', this.user);
-      localStorage.setItem('isLoggedIn', 'true');
-      this.router.navigate(['/profile']);
-    } else {
-      console.log('Formulario de inicio de sesión inválido');
+  onSubmitSignIn(signInForm: NgForm): void {
+    if (signInForm.invalid) {
+      this.errorMessage = 'Por favor, completa todos los campos correctamente.';
+      return;
     }
+
+    this.authService.login(this.user.email, this.user.password).subscribe({
+      next: (response) => {
+        this.authService.setToken(response.token); // Guarda el token en el servicio de autenticación
+        const userType = this.authService.getUserType();
+
+        // Redirige según el tipo de usuario
+        if (userType == 0) {
+          this.router.navigate(['/users']); // Admin
+        } else {
+          this.router.navigate(['/profile']); // Usuario normal
+        }
+      },
+      error: (error) => {
+        this.errorMessage = error.message; // Muestra el mensaje de error
+      }
+    });
   }
 
   isEmailInvalid(form: NgForm): boolean {
