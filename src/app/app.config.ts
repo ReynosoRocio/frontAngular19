@@ -15,6 +15,7 @@ import { providePrimeNG } from 'primeng/config';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { withInterceptors } from '@angular/common/http';
 import { PrimeIcons } from 'primeng/api';
+import Aura from '@primeng/themes/aura';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -27,30 +28,14 @@ export const appConfig: ApplicationConfig = {
     provideAnimationsAsync(),
     providePrimeNG({
       theme: {
-        preset: {
-          primaryColor: '#FF5722', // Orange-red for highlights
-          secondaryColor: '#4CAF50', // Green for confirmations
-          surfaceColor: '#FFFFFF', // White for surfaces
-          textColor: '#212121', // Dark text
-          borderColor: '#E0E0E0', // Light gray for borders
-          errorColor: '#F44336', // Red for errors
-          warningColor: '#FFC107', // Amber for warnings
-          infoColor: '#2196F3', // Blue for informational messages
-          successColor: '#4CAF50' // Green for success
+          preset: Aura,
+          options: {
+              darkModeSelector: false
+          }
+          
         },
-        options: {
-          darkModeSelector: false // Disable dark mode
-        }
-      },
-      ripple: true,
-      inputVariant: 'filled',
-      zIndex: {
-        modal: 1100,    // dialog, sidebar
-        overlay: 1000,  // dropdown, overlaypanel
-        menu: 1000,     // overlay menus
-        tooltip: 1100   // tooltip
-      }
-    }),
+      
+  }),
     { provide: 'BASE_URL', useValue: 'http://127.0.0.1:8000/api' }
   ]
 };
