@@ -76,6 +76,7 @@ export class LoginComponent implements OnInit {
   };
 
   errorMessage = '';
+  showErrorPopup = false; // Controla la visibilidad del popup
 
   constructor(
     private authService: AuthenticationService,
@@ -108,6 +109,7 @@ export class LoginComponent implements OnInit {
   onSubmitSignIn(signInForm: NgForm): void {
     if (signInForm.invalid) {
       this.errorMessage = 'Por favor, completa todos los campos correctamente.';
+      this.showErrorPopup = true; // Muestra el popup
       return;
     }
 
@@ -115,20 +117,26 @@ export class LoginComponent implements OnInit {
       next: (response) => {
         if (response) {
           const userType = this.authService.getUserType();
-          if (userType === 0) {
+          if (userType == 0) {
             this.router.navigate(['/users']); // Admin
           } else {
             this.router.navigate(['/profile']); // Usuario normal
           }
         } else {
           this.errorMessage = 'Error al iniciar sesión. Token inválido.';
+          this.showErrorPopup = true; // Muestra el popup
         }
       },
       error: (error) => {
         console.error('Error en el inicio de sesión:', error);
-        this.errorMessage = error.message || 'Ocurrió un error inesperado.';
+        this.errorMessage = error.error?.error || 'Ocurrió un error al iniciar sesión.';
+        this.showErrorPopup = true; // Muestra el popup
       }
     });
+  }
+
+  closeErrorPopup(): void {
+    this.showErrorPopup = false; // Cierra el popup
   }
 
   isEmailInvalid(form: NgForm): boolean {

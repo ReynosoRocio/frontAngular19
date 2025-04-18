@@ -80,6 +80,15 @@ export class AuthenticationService {
     return null;
   }
 
+  getUserId(): string | null {
+    const token = this.getToken();
+    if (token) {
+      const decodedToken = this.decodeToken(token);
+      return decodedToken ? decodedToken.userId : null; // Extract 'id' key
+    }
+    return null;
+  }
+
   private decodeToken(token: string): any {
     try {
       const payload = atob(token.split('.')[1]); // Decodifica el payload del JWT

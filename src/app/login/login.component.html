@@ -101,4 +101,11 @@
         </div>
       </div>
     </div>
+    <div *ngIf="showErrorPopup" class="error-popup">
+      <div class="error-popup-content">
+        <h2>Error</h2>
+        <p>{{ errorMessage }}</p>
+        <button (click)="closeErrorPopup()">Cerrar</button>
+      </div>
+    </div>
   </div>
