@@ -2,11 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AuthenticationService } from '../authentication.service';
 import { UserEditComponent } from '../user-edit/user-edit.component'; // Import UserEditComponent
+import { InputTextModule } from 'primeng/inputtext';
+import { ButtonModule } from 'primeng/button';
+import { MessageModule } from 'primeng/message';
 
 @Component({
   selector: 'app-users',
   standalone: true,
-  imports: [CommonModule, UserEditComponent],
+  imports: [CommonModule, UserEditComponent, InputTextModule, ButtonModule, MessageModule],
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss']
 })

@@ -1,4 +1,4 @@
-<p-button (click)="openModal()" icon="pi pi-pencil" class="p-button p-button-outlined">
+<p-button (click)="openModal()" icon="pi pi-pencil" >
   {{ mode == 0 ? 'Editar mi perfil' : mode == 2 ? 'Crear usuario' : 'Editar usuario' }}
 </p-button>
 
@@ -9,7 +9,7 @@
       <!-- Email -->
       <div class="p-field">
         <label for="email">Correo Electrónico</label>
-        <input pInputText type="email" id="email" [(ngModel)]="user.email" name="email" required email />
+        <p-input pInputText type="email" id="email" [(ngModel)]="user.email" name="email" required email />
         <small *ngIf="editForm?.submitted && !user?.email" class="p-error">El correo es obligatorio.</small>
         <small *ngIf="editForm?.submitted && user?.email && editForm.controls['email']?.errors?.['email']" class="p-error">El correo no es válido.</small>
       </div>
@@ -17,14 +17,14 @@
       <!-- Name -->
       <div class="p-field">
         <label for="name">Nombre</label>
-        <input pInputText type="text" id="name" [(ngModel)]="user.name" name="name" required />
+        <p-input pInputText type="text" id="name" [(ngModel)]="user.name" name="name" required />
         <small *ngIf="editForm?.submitted && !user?.name" class="p-error">El nombre es obligatorio.</small>
       </div>
 
       <!-- Lastname -->
       <div class="p-field">
         <label for="lastname">Apellido</label>
-        <input pInputText type="text" id="lastname" [(ngModel)]="user.lastname" name="lastname" required />
+        <p-input pInputText type="text" id="lastname" [(ngModel)]="user.lastname" name="lastname" required />
         <small *ngIf="editForm?.submitted && !user?.lastname" class="p-error">El apellido es obligatorio.</small>
       </div>
 
@@ -55,7 +55,7 @@
       <!-- Birth Date -->
       <div class="p-field">
         <label for="birthDate">Fecha de Nacimiento</label>
-        <input pInputText type="date" id="birthDate" [(ngModel)]="user.birthDate" name="birthDate" required />
+        <p-input pInputText type="date" id="birthDate" [(ngModel)]="user.birthDate" name="birthDate" required />
         <small *ngIf="editForm?.submitted && !user?.birthDate" class="p-error">La fecha de nacimiento es obligatoria.</small>
         <small *ngIf="editForm?.submitted && user?.birthDate && !isOldEnough(user.birthDate)" class="p-error">
           Debes tener al menos 13 años para actualizar los datos.
