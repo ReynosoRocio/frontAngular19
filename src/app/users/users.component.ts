@@ -5,11 +5,13 @@ import { UserEditComponent } from '../user-edit/user-edit.component'; // Import 
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { MessageModule } from 'primeng/message';
+import { PanelModule } from 'primeng/panel';
+import { TableModule } from 'primeng/table';
 
 @Component({
   selector: 'app-users',
   standalone: true,
-  imports: [CommonModule, UserEditComponent, InputTextModule, ButtonModule, MessageModule],
+  imports: [CommonModule, UserEditComponent, InputTextModule, ButtonModule, MessageModule, PanelModule, TableModule],
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss']
 })

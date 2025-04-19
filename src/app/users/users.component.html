@@ -4,27 +4,31 @@
 
 <div *ngIf="isAuthorized">
   <app-user-edit [mode]="2"></app-user-edit>
-  <table>
-    <thead>
-      <tr>
-        <th>Email</th>
-        <th>Nombre</th>
-        <th>Apellido</th>
-        <th>Fecha de Nacimiento</th>
-        <th>Acciones</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let user of users">
-        <td>{{ user.email }}</td>
-        <td>{{ user.name }}</td>
-        <td>{{ user.lastname }}</td>
-        <td>{{ user.birthDate }}</td>
-        <td>
-          <app-user-edit [mode]="0" [userId]="'wewjewj'"></app-user-edit>
-          <p-button  severity="danger" (click)="onDelete(user.id)"><i class="pi pi-trash"> </i>Borrar</p-button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <p-panel header="Lista de Usuarios" styleClass="p-panel-responsive">
+    <p-table [value]="users" [paginator]="true" [rows]="10" [scrollable]="true" scrollHeight="400px" scrollWidth="100%">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Email</th>
+          <th>Nombre</th>
+          <th>Apellido</th>
+          <th>Fecha de Nacimiento</th>
+          <th>Acciones</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-user>
+        <tr>
+          <td>{{ user.email }}</td>
+          <td>{{ user.name }}</td>
+          <td>{{ user.lastname }}</td>
+          <td>{{ user.birthDate }}</td>
+          <td>
+            <app-user-edit [mode]="0" [userId]="user.id"></app-user-edit>
+            <p-button severity="danger" (click)="onDelete(user.id)">
+              <i class="pi pi-trash"></i> Borrar
+            </p-button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </p-panel>
 </div>
