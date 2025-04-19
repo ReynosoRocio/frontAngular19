@@ -3,7 +3,7 @@
 </div>
 
 <div *ngIf="isAuthorized">
-  <app-user-edit [mode]="2"></app-user-edit>
+  <app-user-edit [mode]="2" class="m-2"></app-user-edit>
   <p-panel header="Lista de Usuarios" styleClass="p-panel-responsive">
     <p-table [value]="users" [paginator]="true" [rows]="10" [scrollable]="true" scrollHeight="400px" scrollWidth="100%">
       <ng-template pTemplate="header">
@@ -22,8 +22,8 @@
           <td>{{ user.lastname }}</td>
           <td>{{ user.birthDate }}</td>
           <td>
-            <app-user-edit [mode]="0" [userId]="user.id"></app-user-edit>
-            <p-button severity="danger" (click)="onDelete(user.id)">
+            <app-user-edit [mode]="0" [userId]="user.id" class="m-2"></app-user-edit>
+            <p-button severity="danger" (click)="onDelete(user.id)" class="m-2">
               <i class="pi pi-trash"></i> Borrar
             </p-button>
           </td>
