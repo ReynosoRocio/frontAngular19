@@ -7,10 +7,13 @@ import { ButtonModule } from 'primeng/button';
 import { Select2 } from 'ng-select2-component'; // Import Select2 component
 import { InputTextModule } from 'primeng/inputtext';
 import { MessageModule } from 'primeng/message';
+import { DatePickerModule } from 'primeng/datepicker';
+import { InputIconModule } from 'primeng/inputicon';
+
 @Component({
   selector: 'app-user-edit',
   standalone: true,
-  imports: [CommonModule, FormsModule, PasswordModule, DropdownModule, ButtonModule, Select2, InputTextModule, MessageModule], // Add Select2 here
+  imports: [CommonModule, FormsModule, PasswordModule, DropdownModule, ButtonModule, Select2, InputTextModule, MessageModule, DatePickerModule, InputIconModule], // Add Select2 here
   templateUrl: './user-edit.component.html',
   styleUrls: ['./user-edit.component.scss']
 })
