@@ -4,6 +4,7 @@ import { CardModule } from 'primeng/card';
 import { AvatarModule } from 'primeng/avatar';
 import { ButtonModule } from 'primeng/button';
 import { UserEditComponent } from '../user-edit/user-edit.component'; // Import UserEditComponent
+import { states } from '../models/states.model'; // Import the states array
 
 @Component({
   selector: 'app-profile',
@@ -22,4 +23,6 @@ export class ProfileComponent {
     avatar: 'https://ui-avatars.com/api/?name=Juan+Pérez',
     userType: 1 // 0 for admin, 1 for user
   };
+
+  states = states; // Use the imported states array
 }
