@@ -1,5 +1,5 @@
 <p-button severity="success" (click)="openModal()">
-  <i class="pi pi-pencil"></i>
+  <span [innerHTML]="getButtonIcon()"></span>
   {{ mode == 0 ? 'Editar mi perfil' : mode == 2 ? 'Crear usuario' : 'Editar usuario' }}
 </p-button>
 

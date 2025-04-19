@@ -86,6 +86,14 @@ export class UserEditComponent {
     }
   }
 
+  getButtonIcon(): string {
+    if (this.mode === 2) {
+      return '<i class="pi pi-plus-circle"></i>';
+    }else{
+      return '<i class="pi pi-pencil"></i>';
+    }
+  }
+
   states: Array<{ value: string; label: string }> = [
     { value: "1", label: "Aguascalientes" },
     { value: "2", label: "Campeche" },
