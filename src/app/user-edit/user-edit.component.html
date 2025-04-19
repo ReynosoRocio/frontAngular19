@@ -1,4 +1,5 @@
-<p-button pButton  severity="success" (click)="openModal()" icon="pi pi-pencil" >
+<p-button   severity="success" (click)="openModal()" >
+  <i class="pi pi-pencil"></i>
   {{ mode == 0 ? 'Editar mi perfil' : mode == 2 ? 'Crear usuario' : 'Editar usuario' }}
 </p-button>
 
@@ -85,8 +86,8 @@
         <small *ngIf="editForm?.submitted && !user?.userType" class="p-error">El tipo de usuario es obligatorio.</small>
       </div>
 
-      <p-button pButton pRipple severity="success" type="submit" label="Guardar Cambios" class="p-button-success"></p-button>
-      <p-button pButton pRipple severity="danger"  type="button" label="Cancelar" class="p-button-secondary" (click)="closeModal()"></p-button>
+      <p-button  type="submit" label="Guardar Cambios" class="p-button-success"> <i class="pi pi-save"></i></p-button>
+      <p-button  severity="danger"  type="button" label="Cancelar" class="p-button-danger" (click)="closeModal()"><i class="pi  pi-times"></i></p-button>
     </form>
   </div>
 </div>

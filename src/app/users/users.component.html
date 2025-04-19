@@ -22,7 +22,7 @@
         <td>{{ user.birthDate }}</td>
         <td>
           <app-user-edit [mode]="0" [userId]="'wewjewj'"></app-user-edit>
-          <p-button pButton pRipple severity="danger" class="pi pi-trash" (click)="onDelete(user.id)">Borrar</p-button>
+          <p-button  severity="danger" (click)="onDelete(user.id)"><i class="pi pi-trash"> </i>Borrar</p-button>
         </td>
       </tr>
     </tbody>

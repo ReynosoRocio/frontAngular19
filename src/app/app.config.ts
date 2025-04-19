@@ -28,16 +28,20 @@ export const appConfig: ApplicationConfig = {
     provideAnimationsAsync(),
     providePrimeNG({
       theme: {
-          preset: Aura,
-          options: {
-              darkModeSelector: false,
-              
-
-          },
-          
-        },
-      
-  }),
+        preset: Aura,
+        options: {
+          darkModeSelector: false,
+          styles: {
+            button: {
+              fontSize: '14px', // Reduce el tamaño de la fuente
+              whiteSpace: 'normal', // Permite que el texto se ajuste en varias líneas
+              width: 'auto', // Ajusta el ancho automáticamente al contenido
+              padding: '0.5rem 1rem' // Ajusta el relleno para mejorar la apariencia
+            }
+          }
+        }
+      }
+    }),
     { provide: 'BASE_URL', useValue: 'http://127.0.0.1:8000/api' }
   ]
 };
