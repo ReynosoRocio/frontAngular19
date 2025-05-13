@@ -7,8 +7,11 @@
   </ng-template>
   <div class="profile-details">
     <p><i class="pi pi-envelope"></i> <strong>Email:</strong> {{ user.email }}</p>
-    <p><i class="pi pi-calendar"></i> <strong>Fecha de Nacimiento:</strong> {{ user.birthDate }}</p>
-    <p><i class="pi pi-map-marker"></i> <strong>Estado:</strong> {{ user.state }}</p>
+    <p><i class="pi pi-calendar"></i> <strong>Fecha de Nacimiento:</strong> {{ user.dateBirth }}</p>
+    <p><i class="pi pi-map-marker"></i> <strong>Estado:</strong> {{ user.stateBirth }}</p>
+    
+    <!-- add usertype-->
+    <p><i class="pi pi-user"></i> <strong>Tipo de Usuario:</strong> {{ user.userType }}</p>
   </div>
   <ng-template pTemplate="footer">
     <app-user-edit [mode]="1"></app-user-edit>
